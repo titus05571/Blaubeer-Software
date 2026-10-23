@@ -1,0 +1,18 @@
+.chart-hint {
+    margin: -12px 0 16px;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.chart-container svg {
+    user-select: none;
+}
+
+.chart-interaction {
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.chart-interaction:active {
+    cursor: grabbing;
+}

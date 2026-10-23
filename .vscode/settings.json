@@ -1,0 +1,4 @@
+{
+    "git.branchProtection": [],
+    "python.defaultInterpreterPath": "${workspaceFolder}/test/LSTM/.maestro/python.exe"
+}
