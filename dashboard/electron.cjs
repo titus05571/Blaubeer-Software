@@ -8,8 +8,8 @@ function createWindow() {
         height: 900,
         minWidth: 900,
         minHeight: 600,
-        rezisable: true,
-        title: "CO₂ Analytics",
+        resizable: true,
+        title: "Blaubeer-Software",
         webPreferences: {
             contextIsolation: true,
             nodeIntegration: false,

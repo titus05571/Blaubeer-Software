@@ -78,7 +78,6 @@ export default function Sidebar() {
 
                 <nav className="sidebar-navigation">
                     <section className="navigation-group">
-                        {menuItem("home", "Dashboard", "control")}
                         {menuItem("placeholder", "Jupyter Notebook", "book")}
                     </section>
 
