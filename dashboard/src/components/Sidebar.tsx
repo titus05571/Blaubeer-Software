@@ -4,8 +4,7 @@ import type { IconName } from "@blueprintjs/core";
 
 {/* Pages */ }
 import JNotebook from "../pages/JNoteBook";
-import BisJetztGraph from "../pages/Analyse/Analyse";
-
+import SMARD_Analyse from "../pages/SMARD_Analyse/SMARD_Analyse";
 {/* Css import */ }
 import "./Sidebar.css";
 
@@ -22,9 +21,9 @@ type PageInfo = {
 };
 
 const appItems: MenuItem[] = [
-    { id: "analyse", label: "Analyse", icon: "globe", color: "#45c01f" },
-    { id: "contour", label: "MS2", icon: "lightning", color: "#f59e0b" },
-    { id: "speicherkapazitaet", label: "MS3", icon: "database", color: "#ffffff" },
+    { id: "analyse", label: "SMARD Analyse", icon: "globe", color: "#45c01f" },
+    { id: "contour", label: "Stromverbrauch", icon: "lightning", color: "#f59e0b" },
+    { id: "speicherkapazitaet", label: "Speicherkapazität", icon: "database", color: "#ffffff" },
     { id: "contour3", label: "MS3+4", icon: "filter", color: "#f59e0b" },
     { id: "contour4", label: "MS4+5", icon: "filter", color: "#f59e0b" },
 ];
@@ -123,7 +122,7 @@ export default function Sidebar() {
 
                 {/* Geladenes Modul je nach Auswahl */}
                 {activePage === "analyse" ? (
-                    <BisJetztGraph />
+                    <SMARD_Analyse />
                 ) : activePage === "placeholder" ? (
                     <JNotebook />
                 ) : (
