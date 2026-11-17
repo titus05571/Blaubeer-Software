@@ -1157,7 +1157,6 @@ export default function IstAnalyse({
             const {
                 times,
                 coverageEnds,
-                count,
                 prefixTotal,
                 prefixAllRenewable,
                 prefixCarriers,

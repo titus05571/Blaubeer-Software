@@ -1003,7 +1003,7 @@ const INPUT_STYLE: React.CSSProperties = {
 };
 
 export default function SMARD_Erzeugung({
-    csvUrl = "/SMARD_Erzeugung_2020_2026.csv",
+    csvUrl = `${import.meta.env.BASE_URL}SMARD_Erzeugung_2020_2026.csv`,
     applyGermanNuclearZeroRule = true,
     width = 900,
     height = 450,
@@ -1157,7 +1157,6 @@ export default function SMARD_Erzeugung({
             const {
                 times,
                 coverageEnds,
-                count,
                 prefixTotal,
                 prefixAllRenewable,
                 prefixCarriers,

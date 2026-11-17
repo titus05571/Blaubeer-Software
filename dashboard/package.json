@@ -1,7 +1,11 @@
+
 {
   "name": "blaubeersoftware-dashboard",
+  "productName": "Blaubeer Software",
+  "author": "Blaubeer Software",
+  "description": "Blaubeer Software - Desktop Dashboard",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "main": "electron.cjs",
   "scripts": {
@@ -9,7 +13,9 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "electron": "electron ."
+    "electron": "electron .",
+    "package": "npm run build && electron-forge package",
+    "make": "npm run build && electron-forge make"
   },
   "dependencies": {
     "@blueprintjs/core": "^6.21.0",
@@ -19,6 +25,7 @@
   },
   "devDependencies": {
     "@electron-forge/cli": "^8.0.1",
+    "@electron-forge/maker-squirrel": "^8.0.1",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",

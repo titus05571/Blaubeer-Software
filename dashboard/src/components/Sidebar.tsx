@@ -3,10 +3,10 @@ import { Icon } from "@blueprintjs/core";
 import type { IconName } from "@blueprintjs/core";
 
 {/* Pages */ }
-import JNotebook from "../pages/JNoteBook";
 import SMARD_Analyse from "../pages/SMARD_Analyse/SMARD_Analyse";
 {/* Css import */ }
 import "./Sidebar.css";
+import Privathaushaltmodell from "../pages/Privathaushaltmodell/Privathaushaltmodell";
 
 type MenuItem = {
     id: string;
@@ -30,7 +30,7 @@ const appItems: MenuItem[] = [
 
 const navigationItems: PageInfo[] = [
     { id: "home", label: "Dashboard" },
-    { id: "placeholder", label: "Jupyter Notebook" },
+    { id: "Privathaushaltmodell", label: "Privathaushaltmodell" },
     { id: "notifications", label: "Notifications" },
     { id: "recent", label: "Recent" },
 ];
@@ -77,7 +77,7 @@ export default function Sidebar() {
 
                 <nav className="sidebar-navigation">
                     <section className="navigation-group">
-                        {menuItem("placeholder", "Jupyter Notebook", "book")}
+                        {menuItem("Privathaushaltmodell", "Privathaushaltmodell", "home")}
                     </section>
 
                     <section className="apps-section">
@@ -123,8 +123,8 @@ export default function Sidebar() {
                 {/* Geladenes Modul je nach Auswahl */}
                 {activePage === "analyse" ? (
                     <SMARD_Analyse />
-                ) : activePage === "placeholder" ? (
-                    <JNotebook />
+                ) : activePage === "Privathaushaltmodell" ? (
+                    <Privathaushaltmodell />
                 ) : (
                     <div className="content-body">
                         <h1>{currentPage}</h1>
