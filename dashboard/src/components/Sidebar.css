@@ -1,335 +1,304 @@
+/* Fixiert das App-Layout exakt auf die volle Fenstergröße (überschreibt index.css / App.css) */
+.dashboard-layout {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    overflow: hidden;
+    background-color: #f1f5f9;
+    text-align: left;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
 
-/* ========================================
-   Global
-   ======================================== */
-
-* {
+.dashboard-layout *,
+.dashboard-layout *::before,
+.dashboard-layout *::after {
     box-sizing: border-box;
 }
 
-html,
-body,
-#root {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    min-width: 0;
-}
-
-body {
-    font-family: Inter, "Segoe UI", sans-serif;
-    background: #f5f6f7;
-    color: #e5e7eb;
-    overflow: hidden;
-}
-
-/* ========================================
-   Dashboard layout
-   ======================================== */
-
-.dashboard-layout {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    min-width: 0;
-    min-height: 0;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-/* ========================================
-   Sidebar
-   ======================================== */
-
+/* Linke Sidebar – exakt 100% Fensterhöhe ohne Abschneiden oben/unten */
 .sidebar {
-    flex: 0 0 240px;
-    width: 240px;
-    min-width: 0;
+    width: 252px;
+    min-width: 252px;
+    max-width: 252px;
     height: 100%;
-    min-height: 0;
-
     display: flex;
     flex-direction: column;
-
-    background: #24292f;
-    border-right: 1px solid #343a40;
-    color: #d1d5db;
-
-    overflow: hidden;
+    background-color: #161b22;
+    color: #e6edf3;
+    border-right: 1px solid #30363d;
+    transition: width 0.2s ease, min-width 0.2s ease, max-width 0.2s ease;
+    overflow-x: hidden;
+    overflow-y: auto;
+    user-select: none;
+    flex-shrink: 0;
 }
 
-/* Header */
+.sidebar.collapsed {
+    width: 68px;
+    min-width: 68px;
+    max-width: 68px;
+}
 
+/* Exakt gleiche Höhe (54px) wie .content-topbar für eine durchgehende Linie */
 .sidebar-header {
-    flex: 0 0 40px;
-    height: 40px;
+    height: 54px;
+    min-height: 54px;
     padding: 0 12px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    border-bottom: 1px solid #30363d;
+    border-bottom: 1px solid #21262d;
+    gap: 8px;
+    flex-shrink: 0;
 }
 
-.brand-mark {
-    display: flex;
-    align-items: center;
+.sidebar.collapsed .sidebar-header {
     justify-content: center;
-    color: #e5e7eb;
+    padding: 0 8px;
 }
 
-.collapse-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 4px;
-    border: 0;
-    color: #9ca3af;
-    background: transparent;
-    cursor: pointer;
-}
-
-.collapse-button:hover {
-    color: #ffffff;
-}
-
-/* ========================================
-   Navigation
-   ======================================== */
-
-.sidebar-navigation {
-    flex: 1 1 0;
-    min-height: 0;
-    min-width: 0;
-
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-.navigation-group {
-    padding: 12px 6px;
-    border-bottom: 1px solid #30363d;
-}
-
-.secondary-group {
-    padding-top: 12px;
-    padding-bottom: 12px;
-}
-
-/* Navigation items */
-
-.sidebar-item {
-    width: 100%;
-    min-width: auto;
-    min-height: auto;
-
+.sidebar-brand {
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: 0;
+}
 
-    padding: 20px 8px;
-    margin: 1px 0;
+.brand-mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    background-color: #238636;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
 
-    border: none;
+.brand-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #f0f6fc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-    background: transparent;
+.sidebar-collapse-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    background-color: #21262d;
     color: #c9d1d9;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
 
-    font-family: inherit;
-    font-size: auto;
-    text-align: left;
+.sidebar-collapse-btn:hover {
+    background-color: #30363d;
+    color: #ffffff;
+}
 
+/* Suchfeld */
+.sidebar-search-wrapper {
+    padding: 12px 12px 4px 12px;
+    flex-shrink: 0;
+}
+
+.sidebar-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    color: #8b949e;
+}
+
+.sidebar-search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #e6edf3;
+    font-size: 12.5px;
+}
+
+.sidebar-search input::placeholder {
+    color: #6e7681;
+}
+
+.sidebar-search-clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #8b949e;
     cursor: pointer;
 }
 
+/* Navigation */
+.sidebar-navigation {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 10px;
+    gap: 14px;
+    min-height: 0;
+}
+
+.sidebar.collapsed .sidebar-navigation {
+    padding: 10px 8px;
+}
+
+.nav-section,
+.apps-section,
+.apps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.apps-heading {
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #8b949e;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    padding: 7px 10px;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: #c9d1d9;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.sidebar.collapsed .sidebar-item {
+    justify-content: center;
+    padding: 8px 0;
+}
+
 .sidebar-item:hover {
-    background: #30363d;
+    background-color: #21262d;
     color: #ffffff;
 }
 
 .sidebar-item.active {
-    background: #1b2026;
+    background-color: rgba(31, 111, 235, 0.24);
     color: #ffffff;
     font-weight: 600;
-}
-
-.sidebar-item > span:last-child {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* ========================================
-   Modules / Apps
-   ======================================== */
-
-.apps-section {
-    padding: 12px 6px;
-}
-
-.apps-heading {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    padding: 0 8px 8px;
-
-    color: #8b949e;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
-
-.view-all {
-    padding: 0;
-    border: none;
-
-    background: transparent;
-    color: #9ca3af;
-
-    font-family: inherit;
-    font-size: 10px;
-    text-decoration: underline;
-
-    cursor: pointer;
-}
-
-.view-all:hover {
-    color: #ffffff;
-}
-
-.app-item {
-    min-height: 36px;
 }
 
 .app-icon {
-    flex: 0 0 24px;
-    width: 24px;
-    height: 24px;
-
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-
-    border-radius: 3px;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    flex-shrink: 0;
 }
 
-/* ========================================
-   Sidebar footer
-   ======================================== */
+.item-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .sidebar-footer {
-    flex: 0 0 36px;
-    height: 36px;
-    min-height: 36px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 12px;
-
-    border-top: 1px solid #30363d;
-
-    color: #8b949e;
+    margin-top: auto;
+    padding: 12px 8px 4px 8px;
+    border-top: 1px solid #21262d;
     font-size: 11px;
+    color: #8b949e;
     white-space: nowrap;
-
-    background: #24292f;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.status-dot {
-    flex: 0 0 7px;
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-    background: #3fb950;
+.sidebar.collapsed .sidebar-footer {
+    text-align: center;
+    padding: 12px 0 4px 0;
 }
 
-/* ========================================
-   Main content
-   ======================================== */
-
-
+/* Rechter Hauptbereich – eigener sauberer Scrollbereich */
 .main-content {
-    flex: 1 1 0;
+    flex: 1;
     min-width: 0;
-    min-height: 0;
     height: 100%;
-
     display: flex;
     flex-direction: column;
-
-    overflow-x: hidden;
     overflow-y: auto;
-
-    color: #24292f;
+    overflow-x: hidden;
+    background-color: #f1f5f9;
+    color: #0f172a;
 }
 
-/* Breadcrumb / top bar */
-
+/* Obere Leiste bündig mit .sidebar-header (54px) */
 .content-topbar {
-    height: 42px;
-    min-height: 42px;
-
+    height: 54px;
+    min-height: 54px;
+    padding: 0 20px;
     display: flex;
     align-items: center;
-    gap: 10px;
-
-    padding: 0 22px;
-
-    background: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
-
-    font-size: 12px;
+    gap: 12px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    flex-shrink: 0;
 }
 
-.breadcrumb-separator {
-    color: #9ca3af;
+.topbar-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background-color: #ffffff;
+    color: #475569;
+    cursor: pointer;
 }
 
-.content-topbar strong {
-    color: #24292f;
+.topbar-toggle-btn:hover {
+    background-color: #f8fafc;
+    color: #0f172a;
 }
 
-/* Page content */
-
+/* Inhaltsfläche füllt den Platz sauber aus */
 .content-body {
-    min-width: 0;
-    max-width: 100%;
-    padding: 32px;
-}
-
-.content-body h1 {
-    margin-top: 0;
-    font-size: 26px;
-    font-weight: 600;
-}
-
-.content-body p {
-    color: #6b7280;
-    font-size: 14px;
-}
-
-/* ========================================
-   Smaller windows
-   ======================================== */
-
-@media (max-width: 700px) {
-    .sidebar {
-        flex-basis: 200px;
-    }
-
-    .content-body {
-        padding: 20px;
-    }
-
-    .content-topbar {
-        padding: 0 14px;
-    }
+    flex: 1;
+    width: 100%;
+    padding: 20px;
+    text-align: left;
 }
