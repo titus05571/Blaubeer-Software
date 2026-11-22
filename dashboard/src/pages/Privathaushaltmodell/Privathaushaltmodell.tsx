@@ -1570,12 +1570,9 @@ export default function Privathaushaltmodell() {
                         }}
                     >
                         <div>
-                            <h2 style={{ margin: 0, fontSize: 18 }}>
-                                3D-Systemmodell: Idealer Privathaushalt für die Energiewende
+                            <h2 style={{ margin: 0, color: "#94a3b8", fontSize: 18 }}>
+                                Idealer Privathaushalt für die Energiewende
                             </h2>
-                            <div style={{ fontSize: 12, color: "#94a3b8", marginTop: 2 }}>
-                                Ziehen = 360° Drehen & Neigen · Mausrad = Zoom · Nummern-Pins (1–6) anklicken
-                            </div>
                         </div>
 
                         <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>

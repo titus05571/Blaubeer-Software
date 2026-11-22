@@ -6,6 +6,8 @@ import type { IconName } from "@blueprintjs/core";
 import SMARD_Analyse from "../pages/SMARD_Analyse/SMARD_Analyse";
 import Privathaushaltmodell from "../pages/Privathaushaltmodell/Privathaushaltmodell";
 import DecisionEngine from "../pages/AGORA/DecisionEngine";
+import GeographischeAnalyse from "../pages/GeographischeAnalyse/GeographischeAnalyse";
+import DigitalTwin from "../pages/DigitalTwin/DigitalTwin";
 
 /* Css import */
 import "./Sidebar.css";
@@ -25,10 +27,12 @@ type NavItem = {
 
 const appItems: MenuItem[] = [
     { id: "analyse", label: "Anteil EE", icon: "globe", color: "#45c01f" },
-    { id: "decisionengine", label: "DecisionEngine", icon: "locomotive", color: "#a78bfa" },
+    { id: "geographische", label: "Geographische Analyse", icon: "map", color: "#10b981" },
     { id: "privathaushaltmodell", label: "Privathaushaltmodell", icon: "home", color: "#f59e0b" },
+    { id: "digitaltwin", label: "Digitales Abbild (EE)", icon: "locate", color: "#38bdf8" },
 ];
 
+// { id: "decisionengine", label: "DecisionEngine", icon: "locomotive", color: "#a78bfa" },
 const navigationItems: NavItem[] = [
     { id: "home", label: "Dashboard", icon: "dashboard" },
 ];
@@ -36,7 +40,7 @@ const navigationItems: NavItem[] = [
 const STORAGE_KEY = "blaubeer_sidebar_collapsed";
 
 export default function Sidebar() {
-    const [activePage, setActivePage] = useState("home");
+    const [activePage, setActivePage] = useState("dashboard");
     const [search, setSearch] = useState("");
     const [isCollapsed, setIsCollapsed] = useState<boolean>(() => {
         try {
@@ -54,7 +58,6 @@ export default function Sidebar() {
         }
     }, [isCollapsed]);
 
-    // Tastenkürzel Strg+B / Cmd+B zum schnellen Ein-/Ausklappen
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "b") {
@@ -210,27 +213,17 @@ export default function Sidebar() {
             </aside>
 
             <main className="main-content">
-                <div className="content-topbar">
-                    <button
-                        type="button"
-                        className="topbar-toggle-btn"
-                        onClick={() => setIsCollapsed((prev) => !prev)}
-                        title={isCollapsed ? "Sidebar öffnen" : "Sidebar schließen"}
-                        aria-label="Sidebar umschalten"
-                    >
-                        <Icon icon="menu" size={15} />
-                    </button>
 
-                    <strong>{currentPage}</strong>
-                </div>
-
-                {/* Geladenes Modul je nach Auswahl */}
-                {activePage === "analyse" ? (
+                {activePage === "digitaltwin" ? (
+                    <DigitalTwin />
+                ) : activePage === "analyse" ? (
                     <SMARD_Analyse />
                 ) : activePage === "privathaushaltmodell" ? (
                     <Privathaushaltmodell />
                 ) : activePage === "decisionengine" ? (
                     <DecisionEngine />
+                ) : activePage === "geographische" ? (
+                    <GeographischeAnalyse />
                 ) : (
                     <div className="content-body">
                         <h1>{currentPage}</h1>
