@@ -7,10 +7,10 @@ import SMARD_Analyse from "../pages/SMARD_Analyse/SMARD_Analyse";
 import Privathaushaltmodell from "../pages/Privathaushaltmodell/Privathaushaltmodell";
 import DecisionEngine from "../pages/AGORA/DecisionEngine";
 import GeographischeAnalyse from "../pages/GeographischeAnalyse/GeographischeAnalyse";
-import DigitalTwin from "../pages/DigitalTwin/DigitalTwin";
 
 /* Css import */
 import "./Sidebar.css";
+import NetzlastModule from "../pages/Stromverbrauch_Sektorkupplung/NetzlastModule";
 
 type MenuItem = {
     id: string;
@@ -25,14 +25,14 @@ type NavItem = {
     icon: IconName;
 };
 
+// Navigator items for the sidebar
 const appItems: MenuItem[] = [
     { id: "analyse", label: "Anteil EE", icon: "globe", color: "#45c01f" },
+    { id: "decisionengine", label: "DecisionEngine", icon: "locomotive", color: "#a78bfa" },
+    { id: "privathaushaltmodell", label: "Netzlastmodell", icon: "model", color: "#f59e0b" },
     { id: "geographische", label: "Geographische Analyse", icon: "map", color: "#10b981" },
-    { id: "privathaushaltmodell", label: "Privathaushaltmodell", icon: "home", color: "#f59e0b" },
-    { id: "digitaltwin", label: "Digitales Abbild (EE)", icon: "locate", color: "#38bdf8" },
 ];
 
-// { id: "decisionengine", label: "DecisionEngine", icon: "locomotive", color: "#a78bfa" },
 const navigationItems: NavItem[] = [
     { id: "home", label: "Dashboard", icon: "dashboard" },
 ];
@@ -214,12 +214,15 @@ export default function Sidebar() {
 
             <main className="main-content">
 
-                {activePage === "digitaltwin" ? (
-                    <DigitalTwin />
+                {activePage === "dashboard" ? (
+                    <div className="content-body">
+                        <h1>Dashboard</h1>
+                        <p>Willkommen im Dashboard!</p>
+                    </div>
                 ) : activePage === "analyse" ? (
                     <SMARD_Analyse />
                 ) : activePage === "privathaushaltmodell" ? (
-                    <Privathaushaltmodell />
+                    <NetzlastModule />
                 ) : activePage === "decisionengine" ? (
                     <DecisionEngine />
                 ) : activePage === "geographische" ? (

@@ -449,11 +449,8 @@ export default function GeographischeAnalyse({
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
                     <div>
                         <h2 style={{ margin: 0, fontSize: 19, color: "#f8fafc" }}>
-                            Politische Deutschlandkarte: Windkraft (Nordsee/Ostsee & Länder), PV & Speicher
+                            Geographische Veranschauchlichung
                         </h2>
-                        <div style={{ fontSize: 12, color: "#94a3b8" }}>
-                            Mausrad = Zoom · Ziehen = Verschieben · <strong>Rechtsklick auf Bundesland / Nordsee / Ostsee = Anlagen hinzufügen</strong>
-                        </div>
                     </div>
 
                     <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>

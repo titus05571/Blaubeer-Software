@@ -1660,7 +1660,7 @@
                     s.windOffGw,
                     `${s.batteryPowerGw} / ${s.batteryCapGwh}`,
                     s.dsmSharePct,
-                    s.electrolyzerGw,
+                    s.electrolyzerGw ,
                     fmt1.format(r.usableEeSharePct),
                     fmt1.format(r.curtailedTwh),
                     fmt1.format(r.peakBackupGw),
@@ -1711,9 +1711,8 @@
                         }}
                     >
                         <div>
-                            <h2 style={{ margin: 0, fontSize: 20 }}>
-                                DecisionEngine: Viertelstundenscharfe Szenariosimulation
-                                (2030–2045)
+                            <h2 style={{ margin: 0, color: "#94a3b8",fontSize: 20 }}>
+                                DecisionEngine
                             </h2>
                             <div
                                 style={{
@@ -1722,8 +1721,6 @@
                                     marginTop: 3,
                                 }}
                             >
-                                Datenbasis: SMARD 15-Min.-Zeitreihen × Agora-Studie
-                                „Klimaneutrales Deutschland“ & EEG 2023
                             </div>
                         </div>
 
@@ -1745,7 +1742,7 @@
                                 />
                             </label>
                             <label style={BTN_STYLE}>
-                                📂 Verbrauchs-CSV (Netzlast)
+                                📂 Verbrauchs-CSV
                                 <input
                                     type="file"
                                     accept=".csv"
@@ -1984,19 +1981,6 @@
                                         >
                                             📊 Szenariovergleich (2030–2045)
                                         </button>
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                setActiveTab("architecture")
-                                            }
-                                            style={
-                                                activeTab === "architecture"
-                                                    ? TAB_ACTIVE
-                                                    : BTN_STYLE
-                                            }
-                                        >
-                                            🧭 Systemfluss-Diagramm
-                                        </button>
                                     </div>
 
                                     {activeTab !== "architecture" && (
@@ -2006,8 +1990,6 @@
                                                 color: "#94a3b8",
                                             }}
                                         >
-                                            💡 Maus über den Graphen bewegen für
-                                            Detailwerte zum Datensatz
                                         </span>
                                     )}
                                 </div>
@@ -2501,32 +2483,7 @@
                                     </div>
                                 )}
 
-                                {/* Wissenschaftliche Parameter-Begründung */}
-                                <div
-                                    style={{
-                                        background: "#1e293b",
-                                        borderLeft: "4px solid #eab308",
-                                        borderRadius: 10,
-                                        padding: "12px 14px",
-                                        fontSize: 12.5,
-                                        lineHeight: 1.5,
-                                        color: "#e2e8f0",
-                                    }}
-                                >
-                                    <div
-                                        style={{
-                                            fontWeight: 700,
-                                            color: "#facc15",
-                                            marginBottom: 4,
-                                        }}
-                                    >
-                                        Wissenschaftliche Begründung ({params.name} ·
-                                        Zieljahr {params.year}):
-                                    </div>
-                                    {activePresetId === "custom"
-                                        ? "Benutzerdefinierte Parameter-Sensitivität auf Basis des gewählten Stützjahres zur Untersuchung von Verbrauch, EE-Ausbau und Flexibilisierung."
-                                        : params.justification}
-                                </div>
+                                
                             </div>
 
                             {/* UNTEN: Szenario-Parameter im übersichtlichen 3-Spalten-Grid */}

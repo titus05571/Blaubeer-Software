@@ -64,74 +64,74 @@ const MODULES: readonly ModuleMeta[] = [
         badge: "1",
         title: "Photovoltaikanlage (Dach)",
         shortTitle: "Photovoltaik",
-        spec: "12 kWp Ost-/West- oder Süddach",
+        spec: "PLACEHOLDER",
         color: "#eab308",
         anchor: [0, 3.85, 0.95],
         summary:
-            "Erzeugt rund 11.500 kWh erneuerbaren Solarstrom pro Jahr direkt auf dem eigenen Dach und bildet das Fundament für Wärmepumpe und Elektromobilität.",
-        impactHint: "+35–40 % Basis-Autarkie & ~4,8 t CO₂-Vermeidung/Jahr",
+            "PLACEHOLDER",
+        impactHint: "PLACEHOLDER",
     },
     {
         id: "battery",
         badge: "2",
         title: "Heimspeicher (Batterie)",
         shortTitle: "Batteriespeicher",
-        spec: "10 kWh Lithium-Eisenphosphat (LFP)",
+        spec: "PLACEHOLDER",
         color: "#10b981",
         anchor: [-1.45, 1.05, -0.65],
         interior: true,
         summary:
-            "Speichert überschüssigen Solarstrom vom Mittag für den Abend und die Nacht. Steigert den Eigenverbrauch von ca. 30 % auf über 70 %.",
-        impactHint: "Verdoppelt die nutzbare Solarstrom-Autarkie am Abend",
+            "PLACEHOLDER",
+        impactHint: "PLACEHOLDER",
     },
     {
         id: "heatpump",
         badge: "3",
         title: "Luft-Wasser-Wärmepumpe & Flächenheizung",
         shortTitle: "Wärmepumpe",
-        spec: "JAZ ~3,8 + thermischer Pufferspeicher",
+        spec: "PLACEHOLDER",
         color: "#f97316",
         anchor: [-3.2, 0.95, 0.65],
         summary:
-            "Macht aus 1 kWh grünem Strom knapp 4 kWh Heizwärme aus der Außenluft, ersetzt fossile Öl-/Gasheizungen vollständig und nutzt das Gebäude als Wärmespeicher.",
-        impactHint: "Spart bis zu ~3,2 t CO₂/Jahr im Wärmesektor",
+            "PLACEHOLDER",
+        impactHint: "PLACEHOLDER",
     },
     {
         id: "ev",
         badge: "4",
         title: "Wallbox & E-Auto (Überschussladen / V2H)",
         shortTitle: "Wallbox & E-Auto",
-        spec: "11 kW steuerbar, PV-Überschussfähig",
+        spec: "PLACEHOLDER",
         color: "#06b6d4",
         anchor: [3.25, 1.0, 0.65],
         summary:
-            "Lädt das Elektrofahrzeug bevorzugt mit eigenem PV-Überschuss oder günstigem Windstrom aus dem Netz – perspektivisch auch als mobiler Rückspeisespeicher (Vehicle-to-Home).",
-        impactHint: "Ersetzt ~1.050 L Kraftstoff (~2,5 t CO₂/Jahr)",
+            "PLACEHOLDER",
+        impactHint: "PLACEHOLDER    ",
     },
     {
         id: "hems",
         badge: "5",
         title: "Smart Meter & Energiemanagement (HEMS)",
         shortTitle: "HEMS & Dynamischer Tarif",
-        spec: "§ 14a EnWG + Börsenstrompreis-Optimierung",
+        spec: "PLACEHOLDER",
         color: "#8b5cf6",
         anchor: [-0.35, 1.45, -1.2],
         interior: true,
         summary:
-            "Vernetzt PV, Speicher, Wärmepumpe und Wallbox intelligent: Verschiebt flexible Lasten automatisch in Sonnenstunden oder Zeiten hoher Windeinspeisung im Stromnetz.",
-        impactHint: "Entlastet Verteilnetze & senkt Reststromkosten um ~25 %",
+            "PLACEHOLDER",
+        impactHint: "PLACEHOLDER",
     },
     {
         id: "insulation",
         badge: "6",
         title: "Gebäudedämmung & 3-fach-Verglasung",
         shortTitle: "Effizienzhülle",
-        spec: "Dach-/Fassadendämmung & Wärmeschutzfenster",
+        spec: "PLACEHOLDER",
         color: "#38bdf8",
         anchor: [1.35, 1.55, 1.75],
         summary:
-            "Reduziert Wärmeverluste um rund 45 % und ermöglicht niedrige Vorlauftemperaturen (30–35 °C), wodurch die Wärmepumpe besonders effizient arbeitet.",
-        impactHint: "Halbiert nahezu den Heizenergiebedarf des Hauses",
+            "PLACEHOLDER",
+        impactHint: "PLACEHOLDER",
     },
 ] as const;
 
@@ -446,46 +446,6 @@ export default function Privathaushaltmodell() {
         });
     };
 
-    const annualStats = useMemo(() => {
-        const hasPv = enabledModules.has("pv");
-        const hasBat = enabledModules.has("battery");
-        const hasHp = enabledModules.has("heatpump");
-        const hasEv = enabledModules.has("ev");
-        const hasHems = enabledModules.has("hems");
-        const hasIns = enabledModules.has("insulation");
-
-        let autarky = 0;
-        if (hasPv) {
-            autarky = 36;
-            if (hasBat) autarky += 31;
-            if (hasHems) autarky += 9;
-            if (hasIns && hasHp) autarky += 5;
-            if (hasEv && hasHems) autarky += 4;
-        }
-        autarky = clamp(autarky, 0, 86);
-
-        let co2Tons = 0;
-        if (hasPv) co2Tons += 3.4;
-        if (hasPv && hasBat) co2Tons += 1.1;
-        if (hasHp) co2Tons += hasIns ? 3.2 : 2.3;
-        if (hasIns && !hasHp) co2Tons += 1.4;
-        if (hasEv) co2Tons += hasPv ? 2.5 : 1.6;
-        if (hasHems) co2Tons += 0.45;
-
-        let savingsEur = 0;
-        if (hasPv) savingsEur += 1150;
-        if (hasPv && hasBat) savingsEur += 620;
-        if (hasHp) savingsEur += hasIns ? 980 : 480;
-        if (hasIns) savingsEur += 640;
-        if (hasEv) savingsEur += hasPv ? 1180 : 650;
-        if (hasHems) savingsEur += 340;
-
-        return {
-            autarky,
-            co2Tons: +co2Tons.toFixed(1),
-            savingsEur: Math.round(savingsEur),
-        };
-    }, [enabledModules]);
 
     // Einmalig gemountete, komplett flackerfreie 3D-Engine.
     useEffect(() => {
@@ -1752,19 +1712,19 @@ export default function Privathaushaltmodell() {
                                 <div style={KPI_BOX_STYLE}>
                                     <div style={{ fontSize: 11, color: "#94a3b8" }}>Autarkiegrad</div>
                                     <div style={{ fontSize: 20, fontWeight: 700, color: "#34d399" }}>
-                                        ~{annualStats.autarky} %
+                                        PLACEHOLDER
                                     </div>
                                 </div>
                                 <div style={KPI_BOX_STYLE}>
                                     <div style={{ fontSize: 11, color: "#94a3b8" }}>CO₂-Vermeidung</div>
                                     <div style={{ fontSize: 20, fontWeight: 700, color: "#38bdf8" }}>
-                                        {annualStats.co2Tons.toLocaleString("de-DE")} t/a
+                                        PLACEHOLDER
                                     </div>
                                 </div>
                                 <div style={KPI_BOX_STYLE}>
                                     <div style={{ fontSize: 11, color: "#94a3b8" }}>Ersparnis</div>
                                     <div style={{ fontSize: 20, fontWeight: 700, color: "#facc15" }}>
-                                        ~{annualStats.savingsEur.toLocaleString("de-DE")} €/a
+                                        PLACEHOLDER
                                     </div>
                                 </div>
                             </div>
